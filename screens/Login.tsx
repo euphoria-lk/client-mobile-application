@@ -3,23 +3,22 @@ import {StyleSheet, StatusBar } from 'react-native';
 import {Container , Header , Content, Grid, Row, View, Form, Item, Input, Label, Button, Text, Icon} from 'native-base';
 import Logo from '../components/Logo';
 import Colors from '../constants/Colors';
-
+import {AuthContext} from '../navigation/cntext';
 interface LoginProps {}
-const signIn=()=>{
-    console.log('signIN')
-}
+
 const Login = (props: LoginProps) => {
+    const {signIn} = React.useContext(AuthContext);
   return (
-    <Container>
+    <Container style={{backgroundColor:'#fff'}}>
         <StatusBar backgroundColor={Colors.LIGHTGRAY}/>
         <Content>
             <Grid>
-                <Row style={{backgroundColor:'#fff', height:250, justifyContent:'center', alignItems:'center'}}>
+                <Row style={{height:250, justifyContent:'center', alignItems:'center'}}>
                     <View style={{height:200, width:200, marginTop:50}}>
                         <Logo/>
                     </View>
                 </Row>
-                <Row style={{backgroundColor:'#fff', height:300, justifyContent:'center'}}>
+                <Row style={{height:300, justifyContent:'center'}}>
                     <Form style = {{width:300,justifyContent:'center', alignItems:'center'}}>
                         <Item floatingLabel bordered>
                             <Icon name='person' style={{color:Colors.GRAY}}/>

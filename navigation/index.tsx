@@ -6,18 +6,52 @@ import { ColorSchemeName } from 'react-native';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
-import Login from '../screens/Login';
-import LinkingConfiguration from './LinkingConfiguration';
+import AuthNavigator from './AuthNavigator';
+import SplashScreen from '../screens/SplashScreen';
+
+import {AuthContext} from './cntext';
+
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+  const [isLoding, setIsLoading] = React.useState(true);
+  const [userToken, setUserToken] = React.useState('');
+
+  const context = React.useMemo(()=>{
+    return{
+      signIn: () =>{
+        setIsLoading(false);
+        setUserToken('asdd')
+      },
+      signOut: () =>{
+        setIsLoading(false);
+        setUserToken('')
+      },
+    };
+  },[])
+
+  React.useEffect(()=>{
+    setTimeout(()=>{
+      setIsLoading(false);
+    },1000)
+  },[])
+
+  if(isLoding)
+  {
+    return <SplashScreen/>
+  }
+
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
-    </NavigationContainer>
+    <AuthContext.Provider value={{signIn:context.signIn,signOut:context.signOut}}>
+      <NavigationContainer>
+        {userToken ?
+        <RootNavigator />
+        :
+        <AuthNavigator/>
+        }
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
 
@@ -28,7 +62,6 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Tab" component={BottomTabNavigator} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
