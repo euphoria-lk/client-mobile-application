@@ -6,7 +6,7 @@ import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import SearchCounselor from '../screens/SearchCounselors';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -64,8 +64,8 @@ function TabTwoNavigator() {
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
+        name="SearchCounselor"
+        component={SearchCounselor}
         options={{ headerTitle: 'Counselors', headerTitleContainerStyle:{alignItems: 'center',}}}
       />
     </TabTwoStack.Navigator>
