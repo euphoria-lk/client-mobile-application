@@ -14,7 +14,7 @@ const LoadingScreen = (props: LoadingScreenProps) => {
             <Grid>
                 <Row style={{height:Layout.window.height * 0.33}}/>
                 <Row style={{height:Layout.window.height * 0.33, justifyContent:'center', alignItems:'center'}}>
-                    <Spinner size='large'/>
+                    <Spinner size='large' color={Colors.NAVYBLUE}/>
                 </Row>
                 <Row style={{height:Layout.window.height * 0.33}}/>
             </Grid>
@@ -28,7 +28,5 @@ export default LoadingScreen;
 const styles = StyleSheet.create({
   container: {
       flex:1,
-    //   justifyContent:'center',
-    //   alignItems:'center'
   }
 });

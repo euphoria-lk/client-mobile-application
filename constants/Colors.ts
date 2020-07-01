@@ -17,6 +17,8 @@ const LIGHTGREEN = '#90ee90'
 const LIGHTGRAY = '#d3d3d3'
 const LIGHTBLUE = '#add8e6'
 
+const TRANSPARENT = '#0000'
+
 export default {
   light: {
     text: '#000',
@@ -44,5 +46,6 @@ export default {
   NAVYBLUE,
   LIGHTBLUE,
   LIGHTGRAY,
-  LIGHTGREEN
+  LIGHTGREEN,
+  TRANSPARENT
 };
