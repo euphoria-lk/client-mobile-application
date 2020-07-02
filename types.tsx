@@ -15,4 +15,6 @@ export type TabOneParamList = {
 
 export type TabTwoParamList = {
   SearchCounselor: undefined;
+  CounselorProfile: {userId:string};
 };
+

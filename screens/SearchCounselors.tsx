@@ -1,109 +1,123 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Header, Left, Body, Right, View, Text, Title, Content, Item, Icon, Input, List, ListItem, Thumbnail, Spinner } from 'native-base';
+import { Container, Header, Left, Body, Text, Content, Item, Icon, Input, List, ListItem, Thumbnail, Spinner } from 'native-base';
 import Colors from '../constants/Colors';
-import Layout from '../constants/Layout';
+import { RouteProp } from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {TabTwoParamList} from '../types'
 
-export default function TabTwoScreen() {
+type ProfileScreenRouteProp = RouteProp<TabTwoParamList, 'SearchCounselor'>;
+
+type ProfileScreenNavigationProp = StackNavigationProp<
+  TabTwoParamList,
+  'SearchCounselor'
+>;
+interface Props
+{
+  route:ProfileScreenRouteProp
+  navigation:ProfileScreenNavigationProp
+}
+
+export default function TabTwoScreen({ route, navigation }: Props) {
   const [counselors, setCounselors] = React.useState([
     {
-      id: 1,
+      id: '1',
       firstName: 'John',
       lastName: 'wick',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
+      image: 'https://randomuser.me/api/portraits/men/90.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
-      id: 2,
+      id: '2',
       firstName: 'Bavindu',
       lastName: 'dilshan',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
@@ -121,7 +135,13 @@ export default function TabTwoScreen() {
 
     counselor.map((value: any, i: any) => {
       list.push(
-        <ListItem key={i} noIndent avatar style={{ backgroundColor: Colors.WHITE, height: 60, paddingHorizontal: 20, marginVertical: 1, borderRadius: 15 }} >
+        <ListItem
+         key={i}
+         noIndent
+         avatar 
+         style={{ backgroundColor: Colors.WHITE, height: 60, paddingHorizontal: 20, marginVertical: 1, borderRadius: 15 }} 
+         onPress={()=> navigation.push('CounselorProfile',{userId:value.id})}
+         >
           <Left>
             <Thumbnail source={{ uri: value.image }} small />
           </Left>
