@@ -1,5 +1,4 @@
 export type RootStackParamList = {
-  Login: undefined;
   Tab: undefined;
   NotFound: undefined;
 };
@@ -16,5 +15,6 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   SearchCounselor: undefined;
   CounselorProfile: {userId:string};
+  AvailableTime:{userId:string};
 };
 

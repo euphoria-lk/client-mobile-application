@@ -8,6 +8,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import SearchCounselor from '../screens/SearchCounselors';
 import CounselorProfile from '../screens/CounselorProfile';
+import AvailableTime from '../screens/AvailableTime';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -73,6 +74,11 @@ function TabTwoNavigator() {
         name="CounselorProfile"
         component={CounselorProfile}
         options={{ headerTitle: 'Counselor Profile'}}
+      />
+      <TabTwoStack.Screen
+        name="AvailableTime"
+        component={AvailableTime}
+        options={{ headerTitle: 'Available Time Slots'}}
       />
     </TabTwoStack.Navigator>
   );

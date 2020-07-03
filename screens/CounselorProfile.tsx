@@ -23,7 +23,7 @@ interface Props {
 const action = [
     {
         text: 'Add apointment',
-        icon: <Icon name='home' style={{color:Colors.WHITE}}/>,
+        icon: <Icon name='md-calendar' style={{color:Colors.WHITE}}/>,
         name: 'btn_appointment',
         position: 1,
         buttonSize:56
@@ -62,7 +62,7 @@ const Profile = ({ route, navigation }: Props) => {
                 actions={action}
                 onPressItem={(name)=>{
                     if (name==='btn_appointment') {
-                        navigation.push('SearchCounselor')
+                        navigation.push('AvailableTime',{userId:route.params.userId})
                     }
                 }}
             />
