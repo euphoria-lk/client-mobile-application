@@ -10,6 +10,7 @@ import SearchCounselor from '../screens/SearchCounselors';
 import CounselorProfile from '../screens/CounselorProfile';
 import AvailableTime from '../screens/AvailableTime';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import AddAppointment from '../screens/AddAppointment';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -79,6 +80,11 @@ function TabTwoNavigator() {
         name="AvailableTime"
         component={AvailableTime}
         options={{ headerTitle: 'Available Time Slots'}}
+      />
+      <TabTwoStack.Screen
+        name="AddAppointment"
+        component={AddAppointment}
+        options={{ headerTitle: 'Confirm Appointment'}}
       />
     </TabTwoStack.Navigator>
   );

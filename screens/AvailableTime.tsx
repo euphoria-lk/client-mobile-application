@@ -3,10 +3,22 @@ import { Text, View, StyleSheet, StatusBar } from 'react-native';
 import { Container, Content, List, ListItem } from 'native-base';
 import Colors from '../constants/Colors';
 import moment, { Moment } from 'moment';
+import { RouteProp } from '@react-navigation/native';
+import { TabTwoParamList } from '../types';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-interface AvailableTimeProps { }
+type ProfileScreenRouteProp = RouteProp<TabTwoParamList, 'CounselorProfile'>;
 
-const AvailableTime = (props: AvailableTimeProps) => {
+type ProfileScreenNavigationProp = StackNavigationProp<
+    TabTwoParamList,
+    'CounselorProfile'
+>;
+interface Props {
+    route: ProfileScreenRouteProp
+    navigation: ProfileScreenNavigationProp
+}
+
+const AvailableTime = ({route,navigation}: Props) => {
 
     const availabletimes = [
         '2013-02-04T09:00:00', '2013-02-04T11:00:00', '2013-02-04T14:00:00', '2013-02-05T09:00:00', '2013-02-05T14:00:00'
@@ -32,7 +44,12 @@ const AvailableTime = (props: AvailableTimeProps) => {
                 )
             }
             list.push(
-                <ListItem key={i} noIndent style={{justifyContent:'center', backgroundColor:Colors.WHITE, borderRadius:20, marginVertical:1, marginHorizontal:30}}>
+                <ListItem
+                 key={i} 
+                 onPress={()=>navigation.push('AddAppointment',{userId:route.params.userId,timeSlot:value})}
+                 noIndent 
+                 style={{justifyContent:'center', backgroundColor:Colors.WHITE, borderRadius:20, marginVertical:1, marginHorizontal:30}}
+                 >
                     <Text style={{fontSize:17}}>{time}</Text>
                 </ListItem>
             )

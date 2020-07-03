@@ -16,5 +16,6 @@ export type TabTwoParamList = {
   SearchCounselor: undefined;
   CounselorProfile: {userId:string};
   AvailableTime:{userId:string};
+  AddAppointment:{userId:string,timeSlot:string}
 };
 
