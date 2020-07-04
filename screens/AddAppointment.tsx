@@ -2,16 +2,16 @@ import * as React from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { TabTwoParamList } from '../types';
+import { TabThreeParamList } from '../types';
 import { Container, Content, Grid, Row, Text, Button } from 'native-base';
 import Colors from '../constants/Colors';
 import moment from 'moment';
 import Layout from '../constants/Layout';
 
-type ProfileScreenRouteProp = RouteProp<TabTwoParamList, 'AddAppointment'>;
+type ProfileScreenRouteProp = RouteProp<TabThreeParamList, 'AddAppointment'>;
 
 type ProfileScreenNavigationProp = StackNavigationProp<
-    TabTwoParamList,
+    TabThreeParamList,
     'AddAppointment'
 >;
 interface Props {

@@ -4,12 +4,12 @@ import { Container, Header, Left, Body, Text, Content, Item, Icon, Input, List, 
 import Colors from '../constants/Colors';
 import { RouteProp } from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {TabTwoParamList} from '../types'
+import {TabThreeParamList} from '../types'
 
-type ProfileScreenRouteProp = RouteProp<TabTwoParamList, 'SearchCounselor'>;
+type ProfileScreenRouteProp = RouteProp<TabThreeParamList, 'SearchCounselor'>;
 
 type ProfileScreenNavigationProp = StackNavigationProp<
-  TabTwoParamList,
+  TabThreeParamList,
   'SearchCounselor'
 >;
 interface Props
@@ -137,6 +137,7 @@ export default function TabTwoScreen({ route, navigation }: Props) {
       list.push(
         <ListItem
          key={i}
+         noBorder
          noIndent
          avatar 
          style={{ backgroundColor: Colors.WHITE, height: 60, paddingHorizontal: 20, marginVertical: 1, borderRadius: 15 }} 

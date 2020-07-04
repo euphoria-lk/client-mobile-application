@@ -11,10 +11,7 @@ const EditProfile = (props: EditProfileProps) => {
             <StatusBar backgroundColor={Colors.LIGHTGRAY} />
             <Content style={{ backgroundColor: Colors.LIGHTGRAY }}>
                 <Grid>
-                    <Row style={{ height: Layout.window.height * 0.1, backgroundColor: Colors.GRAY, alignItems: 'center' }}>
-                        <Text style={styles.heading}>EDIT PROFILE</Text>
-                    </Row>
-                    <Row style={{ height: Layout.window.height * 0.9, width: Layout.window.width * 1, justifyContent: 'center', paddingLeft: 5 }}>
+                    <Row style={{ width: Layout.window.width * 1, justifyContent: 'center', paddingLeft: 5 }}>
                         <Form style={{ width: Layout.window.width * 0.9, alignItems: 'center', paddingTop: 40 }}>
 
                             <Item rounded bordered style={styles.borderStyle}>

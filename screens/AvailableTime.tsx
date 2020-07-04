@@ -4,13 +4,13 @@ import { Container, Content, List, ListItem } from 'native-base';
 import Colors from '../constants/Colors';
 import moment, { Moment } from 'moment';
 import { RouteProp } from '@react-navigation/native';
-import { TabTwoParamList } from '../types';
+import { TabThreeParamList } from '../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type ProfileScreenRouteProp = RouteProp<TabTwoParamList, 'CounselorProfile'>;
+type ProfileScreenRouteProp = RouteProp<TabThreeParamList, 'CounselorProfile'>;
 
 type ProfileScreenNavigationProp = StackNavigationProp<
-    TabTwoParamList,
+    TabThreeParamList,
     'CounselorProfile'
 >;
 interface Props {
@@ -38,7 +38,7 @@ const AvailableTime = ({route,navigation}: Props) => {
             if (!tempdate.match(date)) {
                 tempdate = date
                 list.push(
-                    <ListItem itemDivider key={date} style={{justifyContent:'center'}}>
+                    <ListItem noBorder itemDivider key={date} style={{justifyContent:'center'}}>
                         <Text style={{color:Colors.NAVYBLUE, fontSize:18, fontWeight:'bold'}}>{moment(value).format("dddd, MMMM Do YYYY")}</Text>
                     </ListItem>
                 )
@@ -46,6 +46,7 @@ const AvailableTime = ({route,navigation}: Props) => {
             list.push(
                 <ListItem
                  key={i} 
+                 noBorder
                  onPress={()=>navigation.push('AddAppointment',{userId:route.params.userId,timeSlot:value})}
                  noIndent 
                  style={{justifyContent:'center', backgroundColor:Colors.WHITE, borderRadius:20, marginVertical:1, marginHorizontal:30}}

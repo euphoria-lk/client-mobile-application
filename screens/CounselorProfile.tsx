@@ -5,30 +5,20 @@ import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { RouteProp } from '@react-navigation/native';
-import { TabTwoParamList } from '../types';
+import { TabThreeParamList } from '../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { FloatingAction } from 'react-native-floating-action';
 
-type ProfileScreenRouteProp = RouteProp<TabTwoParamList, 'CounselorProfile'>;
+type ProfileScreenRouteProp = RouteProp<TabThreeParamList, 'CounselorProfile'>;
 
 type ProfileScreenNavigationProp = StackNavigationProp<
-    TabTwoParamList,
+    TabThreeParamList,
     'CounselorProfile'
 >;
 interface Props {
     route: ProfileScreenRouteProp
     navigation: ProfileScreenNavigationProp
 }
-
-const action = [
-    {
-        text: 'Add apointment',
-        icon: <Icon name='md-calendar' style={{color:Colors.WHITE}}/>,
-        name: 'btn_appointment',
-        position: 1,
-        buttonSize:56
-    }
-]
 
 const desscription = "I think it is much easier to just use a unicode character to get the job done. You can look through arrows by googling either Unicode Triangles or Unicode Arrows. Starting with iOS6 Apple changed the character to be an emoji character with a border. To disable the border I add the 0xFE0E Unicode Variation Selector."
 
@@ -59,12 +49,9 @@ const Profile = ({ route, navigation }: Props) => {
 
             </Content>
             <FloatingAction
-                actions={action}
-                onPressItem={(name)=>{
-                    if (name==='btn_appointment') {
-                        navigation.push('AvailableTime',{userId:route.params.userId})
-                    }
-                }}
+                floatingIcon={<Icon name='md-document' style={{color:Colors.WHITE}}/>}
+                onPressMain={()=>navigation.push('AvailableTime',{userId:route.params.userId})}
+                overlayColor={Colors.TRANSPARENT}
             />
         </Container>
     );

@@ -9,9 +9,11 @@ import TabOneScreen from '../screens/TabOneScreen';
 import SearchCounselor from '../screens/SearchCounselors';
 import CounselorProfile from '../screens/CounselorProfile';
 import AvailableTime from '../screens/AvailableTime';
-import { BottomTabParamList, TabTowParamList, TabThreeParamList, TabOneParamList } from '../types';
 import AddAppointment from '../screens/AddAppointment';
+import Appointments from '../screens/Appointments';
 import Profile from '../screens/Profile';
+import EditProfile from '../screens/EditProfile';
+import { BottomTabParamList, TabTowParamList, TabThreeParamList, TabOneParamList, TabFourParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -46,6 +48,14 @@ export default function BottomTabNavigator() {
           title:'Counselors'
         }}
       />
+      <BottomTab.Screen
+        name="TabFour"
+        component={TabFourNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-calendar" color={color} />,
+          title:'Appointments'
+        }}
+      />
     </BottomTab.Navigator>
   );
 }
@@ -66,7 +76,12 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name='Profile'
         component={Profile}
-        options={{ headerTitle: 'Profile', headerTitleContainerStyle:{alignItems: 'center',} }}
+        options={{ headerTitle: 'Your Profile', headerTitleContainerStyle:{alignItems: 'center',} }}
+      />
+      <TabOneStack.Screen
+        name='EditProfile'
+        component={EditProfile}
+        options={{ headerTitle: 'Edit Your Profile', }}
       />
     </TabOneStack.Navigator>
   );
@@ -111,5 +126,19 @@ function TabThreeNavigator() {
         options={{ headerTitle: 'Confirm Appointment'}}
       />
     </TabThreeStack.Navigator>
+  );
+}
+
+const TabFourStack = createStackNavigator<TabFourParamList>()
+
+function TabFourNavigator() {
+  return (
+    <TabFourStack.Navigator>
+      <TabFourStack.Screen
+        name='Appointments'
+        component={Appointments}
+        options={{headerTitle:'Your Appointments', headerTitleContainerStyle:{alignItems: 'center',}}}
+      />
+    </TabFourStack.Navigator>
   );
 }

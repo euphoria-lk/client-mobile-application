@@ -7,10 +7,12 @@ export type BottomTabParamList = {
   TabOne: undefined;
   TabTow: undefined;
   TabThree: undefined;
+  TabFour: undefined;
 };
 
 export type TabOneParamList = {
   Profile: undefined;
+  EditProfile:{userId:string};
 }
 
 export type TabTowParamList = {
@@ -23,4 +25,8 @@ export type TabThreeParamList = {
   AvailableTime:{userId:string};
   AddAppointment:{userId:string,timeSlot:string}
 };
+
+export type TabFourParamList = {
+  Appointments:undefined;
+}
 

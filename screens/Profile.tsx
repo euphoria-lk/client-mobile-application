@@ -1,27 +1,48 @@
 import * as React from 'react';
 import { StyleSheet, StatusBar, Image } from 'react-native';
-import { Container, Header, Content, Grid, Row, Thumbnail, View, Col, Form, Item, Input, Label, Button, Text, Icon, Badge } from 'native-base';
+import { Container, Header, Content, Grid, Row, View, Text,Icon} from 'native-base';
+import {Avatar} from 'react-native-elements';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-interface ProfileProps { }
+import {Ionicons} from '@expo/vector-icons';
+import { FloatingAction } from 'react-native-floating-action';
+import { RouteProp } from '@react-navigation/native';
+import { TabOneParamList } from '../types';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const Profile = (props: ProfileProps) => {
+type ProfileScreenRouteProp = RouteProp<TabOneParamList, 'Profile'>;
+
+type ProfileScreenNavigationProp = StackNavigationProp<
+    TabOneParamList,
+    'Profile'
+>;
+interface Props {
+    route: ProfileScreenRouteProp
+    navigation: ProfileScreenNavigationProp
+}
+
+const Profile = ({route, navigation}: Props) => {
     return (
         <Container>
             <StatusBar backgroundColor={Colors.LIGHTGRAY} />
-            <Content>
+            <Content style={{backgroundColor:Colors.LIGHTGRAY}}>
                 <Grid>
-                    <Row style={{ backgroundColor: '#e8effa', height: Layout.window.height * .4, justifyContent: 'center', alignItems: 'center' }}>
-                        <TouchableOpacity>
-                            <View>
-                                <Image source={{ uri: "https://picsum.photos/180/200" }} style={styles.profileImage} />
-                            </View>
-                        </TouchableOpacity>
-
-                        <View style={styles.add}>
-                            <Icon name='add' style={{ backgroundColor: 'white', borderRadius: 20, width: 30, alignItems: 'center', paddingLeft: 5 }} />
-                        </View>
+                    <Row style={{ backgroundColor: '#e8effa', height: Layout.window.height * .31, justifyContent: 'center', alignItems: 'center' }}>
+                        <Avatar
+                           rounded
+                           source={{uri: "https://randomuser.me/api/portraits/men/94.jpg"}}
+                           size='xlarge'
+                           accessory={{
+                               name:'camera', 
+                               type:'material-community', 
+                               containerStyle:{backgroundColor:Colors.GRAY},
+                               iconStyle:{margin:5, borderRadius:40},
+                               size:30,
+                               style:{height:40, width:40, borderRadius:20, backgroundColor:Colors.TRANSPARENT, justifyContent:'center'}
+                            }}
+                           
+                           showAccessory={true}
+                        />
                     </Row>
                     <Row style={styles.rowBackground}>
                         <Icon name='person' />
@@ -39,12 +60,13 @@ const Profile = (props: ProfileProps) => {
                         <Icon name='paper' />
                         <Text style={styles.textRow}>931212121v</Text>
                     </Row>
-                    <Row style={{ backgroundColor: '#bfc3c9', height: 300 }}>
-                    </Row>
-
-
                 </Grid>
             </Content>
+            <FloatingAction
+               floatingIcon={<Icon name='md-create' style={{color:Colors.WHITE}}/>}
+               onPressMain={()=>navigation.push('EditProfile',{userId:'1234'})}       
+               overlayColor={Colors.TRANSPARENT}  
+            />
         </Container>
     );
 };
@@ -66,7 +88,7 @@ const styles = StyleSheet.create({
     },
 
     rowBackground: {
-        backgroundColor: '#bfc3c9',
+        backgroundColor: Colors.TRANSPARENT,
         height: 60,
         justifyContent: 'center',
         alignItems: 'center',
@@ -84,8 +106,8 @@ const styles = StyleSheet.create({
 
     add: {
         position: "absolute",
-        bottom: 50,
-        right: 120,
+        bottom: 20,
+        right: 110,
         borderColor: 'red',
         alignItems: "center",
     }
