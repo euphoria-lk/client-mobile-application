@@ -5,14 +5,19 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   TabOne: undefined;
-  TabTwo: undefined;
+  TabTow: undefined;
+  TabThree: undefined;
 };
 
 export type TabOneParamList = {
-  TabOneScreen: undefined;
+  Profile: undefined;
+}
+
+export type TabTowParamList = {
+  Forum: undefined;
 };
 
-export type TabTwoParamList = {
+export type TabThreeParamList = {
   SearchCounselor: undefined;
   CounselorProfile: {userId:string};
   AvailableTime:{userId:string};

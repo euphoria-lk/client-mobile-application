@@ -9,8 +9,9 @@ import TabOneScreen from '../screens/TabOneScreen';
 import SearchCounselor from '../screens/SearchCounselors';
 import CounselorProfile from '../screens/CounselorProfile';
 import AvailableTime from '../screens/AvailableTime';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import { BottomTabParamList, TabTowParamList, TabThreeParamList, TabOneParamList } from '../types';
 import AddAppointment from '../screens/AddAppointment';
+import Profile from '../screens/Profile';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -19,20 +20,30 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="TabTow"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
-      <BottomTab.Screen
+        <BottomTab.Screen
         name="TabOne"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
+          title:'Profile'
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="TabTow"
+        component={TabTowNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-people" color={color} />,
+          title:'Forum'
+        }}
+      />
+      <BottomTab.Screen
+        name="TabThree"
+        component={TabThreeNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-search" color={color} />,
+          title:'Counselors'
         }}
       />
     </BottomTab.Navigator>
@@ -53,39 +64,52 @@ function TabOneNavigator() {
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+        name='Profile'
+        component={Profile}
+        options={{ headerTitle: 'Profile', headerTitleContainerStyle:{alignItems: 'center',} }}
       />
     </TabOneStack.Navigator>
   );
 }
+const TabTowStack = createStackNavigator<TabTowParamList>();
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
-
-function TabTwoNavigator() {
+function TabTowNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
+    <TabTowStack.Navigator>
+      <TabTowStack.Screen
+        name="Forum"
+        component={TabOneScreen}
+        options={{ headerTitle: 'Forum', headerTitleContainerStyle:{alignItems: 'center',} }}
+      />
+    </TabTowStack.Navigator>
+  );
+}
+
+const TabThreeStack = createStackNavigator<TabThreeParamList>();
+
+function TabThreeNavigator() {
+  return (
+    <TabThreeStack.Navigator>
+      <TabThreeStack.Screen
         name="SearchCounselor"
         component={SearchCounselor}
         options={{ headerTitle: 'Counselors', headerTitleContainerStyle:{alignItems: 'center',}}}
       />
-      <TabTwoStack.Screen
+      <TabThreeStack.Screen
         name="CounselorProfile"
         component={CounselorProfile}
         options={{ headerTitle: 'Counselor Profile'}}
       />
-      <TabTwoStack.Screen
+      <TabThreeStack.Screen
         name="AvailableTime"
         component={AvailableTime}
         options={{ headerTitle: 'Available Time Slots'}}
       />
-      <TabTwoStack.Screen
+      <TabThreeStack.Screen
         name="AddAppointment"
         component={AddAppointment}
         options={{ headerTitle: 'Confirm Appointment'}}
       />
-    </TabTwoStack.Navigator>
+    </TabThreeStack.Navigator>
   );
 }
