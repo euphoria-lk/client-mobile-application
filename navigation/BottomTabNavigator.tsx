@@ -45,7 +45,7 @@ export default function BottomTabNavigator() {
         component={TabThreeNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-search" color={color} />,
-          title:'Counselors'
+          title:'Counsellors'
         }}
       />
       <BottomTab.Screen
@@ -108,12 +108,12 @@ function TabThreeNavigator() {
       <TabThreeStack.Screen
         name="SearchCounselor"
         component={SearchCounselor}
-        options={{ headerTitle: 'Counselors', headerTitleContainerStyle:{alignItems: 'center',}}}
+        options={{ headerTitle: 'Counsellors', headerTitleContainerStyle:{alignItems: 'center',}}}
       />
       <TabThreeStack.Screen
         name="CounselorProfile"
         component={CounselorProfile}
-        options={{ headerTitle: 'Counselor Profile'}}
+        options={{ headerTitle: 'Counsellor Profile'}}
       />
       <TabThreeStack.Screen
         name="AvailableTime"

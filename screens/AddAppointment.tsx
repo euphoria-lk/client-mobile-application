@@ -32,8 +32,8 @@ const AddAppointment = ({ route, navigation }: Props) => {
                         <Text selectable style={styles.regText}>436bc23ac5</Text>
                     </Row>
                     <Row style={styles.regRow}>
-                        <Text style={styles.regTitle}>Counselor : </Text>
-                        <Text style={styles.regText}>Fedric North</Text>
+                        <Text style={styles.regTitle}>Counsellor : </Text>
+                        <Text style={styles.regText}>John Smith</Text>
                     </Row>
                     <Row style={styles.regRow}>
                         <Text style={styles.regTitle}>Date : </Text>
@@ -56,7 +56,7 @@ const AddAppointment = ({ route, navigation }: Props) => {
                         <Text style={styles.noteText}>You can cancle Appointment within 1 hour after you make appointment. After 1 hour you cannot do anything to this appointment.</Text>
                     </Row>
                     <Row style={styles.btnRow}>
-                        <Button style={styles.btn} onPress={()=>navigation.popToTop()}>
+                        <Button style={styles.btn} onPress={() => navigation.popToTop()}>
                             <Text>Confirm</Text>
                         </Button>
                     </Row>
@@ -69,44 +69,44 @@ const AddAppointment = ({ route, navigation }: Props) => {
 export default AddAppointment;
 
 const styles = StyleSheet.create({
-    regRow:{
-        paddingHorizontal:20,
-        paddingVertical:10
+    regRow: {
+        paddingHorizontal: 20,
+        paddingVertical: 10
     },
-    noteRow:{
-        flexDirection:'column',
-        marginHorizontal:10,
-        paddingHorizontal:10,
-        paddingVertical:15,
-        borderRadius:20,
-        backgroundColor:Colors.LIGHTGRAY
+    noteRow: {
+        flexDirection: 'column',
+        marginHorizontal: 10,
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        borderRadius: 20,
+        backgroundColor: Colors.LIGHTGRAY
     },
-    regTitle:{
-        fontSize:16,
-        fontWeight:'bold'
+    regTitle: {
+        fontSize: 16,
+        fontWeight: 'bold'
     },
-    regText:{
-        fontSize:17,
+    regText: {
+        fontSize: 17,
     },
-    noteTitle:{
-        color:Colors.RED,
-        fontSize:16,
-        fontWeight:'bold',
-        paddingVertical:5
+    noteTitle: {
+        color: Colors.RED,
+        fontSize: 16,
+        fontWeight: 'bold',
+        paddingVertical: 5
     },
-    noteText:{
-        color:Colors.NAVYBLUE,
-        fontSize:17,
-        paddingHorizontal:10
+    noteText: {
+        color: Colors.NAVYBLUE,
+        fontSize: 17,
+        paddingHorizontal: 10
     },
-    btnRow:{
-        marginTop:40,
-        justifyContent:'center',
+    btnRow: {
+        marginTop: 40,
+        justifyContent: 'center',
     },
-    btn:{
-        width:Layout.window.width * 0.8,
-        borderRadius:25,
-        justifyContent:'center',
-        backgroundColor:Colors.INDIGO
+    btn: {
+        width: Layout.window.width * 0.8,
+        borderRadius: 25,
+        justifyContent: 'center',
+        backgroundColor: Colors.INDIGO
     }
 });

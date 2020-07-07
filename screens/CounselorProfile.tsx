@@ -34,12 +34,12 @@ const Profile = ({ route, navigation }: Props) => {
                     <Row style={{ height: Layout.window.height * .30, justifyContent: 'center', alignItems: 'center' }}>
                         <TouchableOpacity>
                             <View>
-                                <Image source={{ uri: "https://randomuser.me/api/portraits/men/94.jpg" }} style={styles.profileImage} />
+                                <Image source={{ uri: "https://randomuser.me/api/portraits/men/99.jpg" }} style={styles.profileImage} />
                             </View>
                         </TouchableOpacity>
                     </Row>
                     <Row style={styles.nameROW}>
-                        <Text style={{ fontSize: 25, fontWeight: '300' }} >Fredrick Walton</Text>
+                        <Text style={{ fontSize: 25, fontWeight: '300' }} >John Smith</Text>
                     </Row>
                     <Row style={styles.descriptionRow}>
                         <Text style={styles.descriptionTitle}>About</Text>

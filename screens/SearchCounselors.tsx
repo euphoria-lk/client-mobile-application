@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 import { Container, Header, Left, Body, Text, Content, Item, Icon, Input, List, ListItem, Thumbnail, Spinner } from 'native-base';
 import Colors from '../constants/Colors';
 import { RouteProp } from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {TabThreeParamList} from '../types'
+import { StackNavigationProp } from '@react-navigation/stack';
+import { TabThreeParamList } from '../types'
 
 type ProfileScreenRouteProp = RouteProp<TabThreeParamList, 'SearchCounselor'>;
 
@@ -12,116 +12,91 @@ type ProfileScreenNavigationProp = StackNavigationProp<
   TabThreeParamList,
   'SearchCounselor'
 >;
-interface Props
-{
-  route:ProfileScreenRouteProp
-  navigation:ProfileScreenNavigationProp
+interface Props {
+  route: ProfileScreenRouteProp
+  navigation: ProfileScreenNavigationProp
 }
 
 export default function TabTwoScreen({ route, navigation }: Props) {
   const [counselors, setCounselors] = React.useState([
     {
       id: '1',
-      firstName: 'John',
-      lastName: 'wick',
+      firstName: 'Jennie',
+      lastName: 'carlton',
       image: 'https://randomuser.me/api/portraits/men/90.jpg'
     },
     {
       id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
+      firstName: 'Brigitte',
+      lastName: 'Cushman',
+      image: 'https://randomuser.me/api/portraits/men/91.jpg'
+    },
+    {
+      id: '2',
+      firstName: 'Kallie',
+      lastName: 'Kaiser',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
       id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
+      firstName: 'Raymond',
+      lastName: 'Boone',
+      image: 'https://randomuser.me/api/portraits/men/93.jpg'
+    },
+    {
+      id: '2',
+      firstName: 'Tania',
+      lastName: 'Brown',
+      image: 'https://randomuser.me/api/portraits/men/99.jpg'
+    },
+    {
+      id: '2',
+      firstName: 'Martin',
+      lastName: 'Santiago',
+      image: 'https://randomuser.me/api/portraits/men/91.jpg'
+    },
+    {
+      id: '2',
+      firstName: 'Lillie',
+      lastName: 'Dominguez',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
       id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
+      firstName: 'Carlton',
+      lastName: 'Stanton',
+      image: 'https://randomuser.me/api/portraits/men/97.jpg'
+    },
+    {
+      id: '2',
+      firstName: 'Yong',
+      lastName: 'Roth',
+      image: 'https://randomuser.me/api/portraits/men/96.jpg'
+    },
+    {
+      id: '2',
+      firstName: 'John',
+      lastName: 'smith',
+      image: 'https://randomuser.me/api/portraits/men/99.jpg'
+    },
+    {
+      id: '2',
+      firstName: 'Hong',
+      lastName: 'Contreras',
       image: 'https://randomuser.me/api/portraits/men/94.jpg'
     },
     {
       id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
+      firstName: 'Maci',
+      lastName: 'Horton',
+      image: 'https://randomuser.me/api/portraits/men/91.jpg'
     },
     {
       id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
+      firstName: 'Kody',
+      lastName: 'Zimmerman',
+      image: 'https://randomuser.me/api/portraits/men/98.jpg'
     },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Bavindu',
-      lastName: 'dilshan',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    }
   ]);
 
   const [listData, setlistData] = React.useState(counselors);
@@ -136,13 +111,13 @@ export default function TabTwoScreen({ route, navigation }: Props) {
     counselor.map((value: any, i: any) => {
       list.push(
         <ListItem
-         key={i}
-         noBorder
-         noIndent
-         avatar 
-         style={{ backgroundColor: Colors.WHITE, height: 60, paddingHorizontal: 20, marginVertical: 1, borderRadius: 15 }} 
-         onPress={()=> navigation.push('CounselorProfile',{userId:value.id})}
-         >
+          key={i}
+          noBorder
+          noIndent
+          avatar
+          style={{ backgroundColor: Colors.WHITE, height: 60, paddingHorizontal: 20, marginVertical: 1, borderRadius: 15 }}
+          onPress={() => navigation.push('CounselorProfile', { userId: value.id })}
+        >
           <Left>
             <Thumbnail source={{ uri: value.image }} small />
           </Left>
