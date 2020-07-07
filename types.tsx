@@ -1,18 +1,32 @@
 export type RootStackParamList = {
-  Login: undefined;
   Tab: undefined;
   NotFound: undefined;
 };
 
 export type BottomTabParamList = {
   TabOne: undefined;
-  TabTwo: undefined;
+  TabTow: undefined;
+  TabThree: undefined;
+  TabFour: undefined;
 };
 
 export type TabOneParamList = {
-  TabOneScreen: undefined;
+  Profile: undefined;
+  EditProfile:{userId:string};
+}
+
+export type TabTowParamList = {
+  Forum: undefined;
 };
 
-export type TabTwoParamList = {
+export type TabThreeParamList = {
   SearchCounselor: undefined;
+  CounselorProfile: {userId:string};
+  AvailableTime:{userId:string};
+  AddAppointment:{userId:string,timeSlot:string}
 };
+
+export type TabFourParamList = {
+  Appointments:undefined;
+}
+
