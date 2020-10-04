@@ -26,6 +26,23 @@ const Profile = ({ route, navigation }: Props) => {
     {
         console.log(route.params.userId) //'#bfc3c9'
     }
+    const actions = [
+        {
+          text: "Make Appoinment",
+          icon: <Icon name="md-document" style={{color:Colors.WHITE}}/>,
+          name: "bt_appointment",
+          position: 2,
+          buttonSize: 50
+        },
+        {
+          text: "Chat",
+          icon: <Icon name="chat" type="MaterialCommunityIcons" style={{color:Colors.WHITE}}/>,
+          name: "bt_chat",
+          position: 1,
+          buttonSize: 50
+        },
+    ]
+
     return (
         <Container>
             <StatusBar backgroundColor={Colors.LIGHTGRAY} />
@@ -49,9 +66,16 @@ const Profile = ({ route, navigation }: Props) => {
 
             </Content>
             <FloatingAction
-                floatingIcon={<Icon name='md-document' style={{color:Colors.WHITE}}/>}
-                onPressMain={()=>navigation.push('AvailableTime',{userId:route.params.userId})}
-                overlayColor={Colors.TRANSPARENT}
+                floatingIcon={<Icon name='emoticon-happy' type='MaterialCommunityIcons' style={{color:Colors.WHITE}}/>}
+                // onPressMain={()=>navigation.push('AvailableTime',{userId:route.params.userId})}
+                actions={actions}
+                onPressItem={(name)=>{
+                    if (name === "bt_appointment") {
+                        navigation.push('AvailableTime',{userId:route.params.userId});
+                    } else {
+                        navigation.push('ChatScreen',{userId:route.params.userId, userName:"Bavindu Dilshan"});
+                    }
+                }}
             />
         </Container>
     );
@@ -77,6 +101,7 @@ const styles = StyleSheet.create({
     nameROW: {
         backgroundColor: Colors.TRANSPARENT,
         height: 40,
+        marginBottom:10,
         justifyContent: 'center',
         alignItems: 'center',
     },

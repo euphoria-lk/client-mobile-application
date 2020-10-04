@@ -24,6 +24,7 @@ export type TabThreeParamList = {
   CounselorProfile: {userId:string};
   AvailableTime:{userId:string};
   AddAppointment:{userId:string,timeSlot:string}
+  ChatScreen: {userId:string,userName:string};
 };
 
 export type TabFourParamList = {

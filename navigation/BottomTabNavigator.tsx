@@ -14,6 +14,7 @@ import Appointments from '../screens/Appointments';
 import Profile from '../screens/Profile';
 import EditProfile from '../screens/EditProfile';
 import { BottomTabParamList, TabTowParamList, TabThreeParamList, TabOneParamList, TabFourParamList } from '../types';
+import ChatScreen from '../screens/ChatScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -119,6 +120,11 @@ function TabThreeNavigator() {
         name="AvailableTime"
         component={AvailableTime}
         options={{ headerTitle: 'Available Time Slots'}}
+      />
+      <TabThreeStack.Screen
+        name="ChatScreen"
+        component={ChatScreen}
+        options={(params)=>({ headerTitle: params.route.params.userName})}
       />
       <TabThreeStack.Screen
         name="AddAppointment"
