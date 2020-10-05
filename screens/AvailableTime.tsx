@@ -7,11 +7,11 @@ import { RouteProp } from '@react-navigation/native';
 import { TabThreeParamList } from '../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type ProfileScreenRouteProp = RouteProp<TabThreeParamList, 'CounselorProfile'>;
+type ProfileScreenRouteProp = RouteProp<TabThreeParamList, 'AvailableTime'>;
 
 type ProfileScreenNavigationProp = StackNavigationProp<
     TabThreeParamList,
-    'CounselorProfile'
+    'AvailableTime'
 >;
 interface Props {
     route: ProfileScreenRouteProp

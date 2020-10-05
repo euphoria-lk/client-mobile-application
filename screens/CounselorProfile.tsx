@@ -135,7 +135,7 @@ const Profile = ({ route, navigation }: Props) => {
                 actions={actions}
                 onPressItem={(name) => {
                     if (name === "bt_appointment") {
-                        navigation.push('AvailableTime', { counsellorEmail: counsellorData?.email });
+                        navigation.push('AvailableTime', { counsellorEmail: counsellorData?.email, userId:userId?userId:"" });
                     } else {
                         navigation.push('ChatScreen', { userId: userId, channelId:chatChannel, userName: userName, iamge:userImage, counsellorName:counsellorData?.name});
                     }
