@@ -1,13 +1,32 @@
 import * as React from 'react';
-import { StyleSheet, StatusBar, ImageBackground } from 'react-native';
+import { StyleSheet, StatusBar, ImageBackground, YellowBox } from 'react-native';
 import { Container, Header, Content, Grid, Row, View, Form, Item, Input, Label, Button, Text, Icon } from 'native-base';
 import Logo from '../components/Logo';
 import Colors from '../constants/Colors';
 import { AuthContext } from '../navigation/cntext';
+import LoadingScreen from './SplashScreen';
 interface LoginProps { }
 
 const Login = (props: LoginProps) => {
     const { signIn } = React.useContext(AuthContext);
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [isLoading, setLoading] = React.useState(false);
+
+    React.useEffect(()=>{
+        YellowBox.ignoreWarnings(['Animated: `useNativeDriver`']);
+    })
+
+    const localSignIn = async () =>{
+        setLoading(true);
+        const res:any = await signIn(email,password);
+        setLoading(res?true:false);
+    }
+    if(isLoading){
+        return(
+            <LoadingScreen/>
+        )
+    }
     return (
         <Container style={{ backgroundColor: '#fff' }}>
             <StatusBar backgroundColor={Colors.LIGHTGRAY} />
@@ -21,17 +40,26 @@ const Login = (props: LoginProps) => {
                         </Row>
                         <Row style={{ height: 300, justifyContent: 'center' }}>
                             <Form style={{ width: 300, justifyContent: 'center', alignItems: 'center' }}>
-                                <Item floatingLabel bordered>
+                                {/* floatingLabel */}
+                                <Item floatingLabel  bordered>
                                     <Icon name='person' style={{ color: Colors.GRAY }} />
-                                    <Label style={{ color: Colors.BLACK }}>Username</Label>
-                                    <Input />
+                                    <Label style={{ color: Colors.BLACK }}>Email</Label>
+                                    <Input 
+                                        onChangeText={txt=>setEmail(txt)}
+                                        value={email}
+                                    />
                                 </Item>
-                                <Item floatingLabel>
+                                {/* floatingLabel */}
+                                <Item floatingLabel >
                                     <Icon name='lock' style={{ color: Colors.GRAY }} />
                                     <Label style={{ color: Colors.BLACK }}>Password</Label>
-                                    <Input />
+                                    <Input 
+                                         onChangeText={txt=>setPassword(txt)}
+                                         value={password}
+                                         secureTextEntry
+                                    />
                                 </Item>
-                                <Button rounded onPress={() => signIn()} style={{ width: 200, justifyContent: 'center', alignItems: 'center', marginTop: 100 }}>
+                                <Button rounded onPress={() => localSignIn()} style={{ width: 200, justifyContent: 'center', alignItems: 'center', marginTop: 100 }}>
                                     <Text>Sign in</Text>
                                 </Button>
                             </Form>

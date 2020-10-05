@@ -8,29 +8,21 @@ import {
   MessageInput,
 } from "stream-chat-expo";
 
-const chatClient = new StreamChat('r3qdy2xxezkj','');
-const name = 'Lahiru'
+const chatClient = new StreamChat('r3qdy2xxezkj');
+const userToken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiTGFoaXJ1In0.1F452Q-xxP_KRAwj-_T6dq7asdq88Mm6TPTVEdi3Zok';
+
 const user = {
   id: 'Lahiru',
   name: 'Dark sun',
   image:
     'https://getstream.io/random_png/?id=dark-sun-9&amp;name=Dark+sun',
 };
-
-// const token = chatClient.createToken('Lahiru');
-// alert("Token "+token);
-
-chatClient.updateAppSettings({
-    disable_auth_checks: true
-});
-
-// const devtoken = chatClient.devToken('Lahiru');
-// alert("DevToken "+devtoken);
-// chatClient.setUser(user,devtoken,);
+chatClient.setUser(user, userToken);
 
 class ChannelScreen extends React.Component {
   render() {
-    const channel = chatClient.channel("messaging", "fgfggf"); //fggfgfdgf
+    const channel = chatClient.channel("messaging", "fggfgfdgf"); //fggfgfdgf
     channel.watch();
 
     return (

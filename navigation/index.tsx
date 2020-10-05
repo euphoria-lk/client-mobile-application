@@ -11,6 +11,8 @@ import SplashScreen from '../screens/SplashScreen';
 
 import {AuthContext} from './cntext';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -20,21 +22,59 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 
   const context = React.useMemo(()=>{
     return{
-      signIn: () =>{
-        setIsLoading(false);
-        setUserToken('asdd')
+      signIn: (email:string,password:string) =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("email", "kasunwpdimuthu@gmail.com");
+        urlencoded.append("password", "dimuthu");
+
+        var requestOptions:RequestInit = {
+          method: 'POST',
+          headers: myHeaders,
+          body: `email=${email}&password=${password}`,
+          redirect: 'follow'
+        };
+
+        fetch("http://34.121.143.209:5000/api/v1/client-service/login", requestOptions)
+          .then(response => response.json())
+          .then(async result => {
+            if(result.success === "true"){
+              console.log(result)
+              await AsyncStorage.setItem('@user_token', result.user_profile._id?result.user_profile._id:'')
+              setUserToken(result.user_profile._id?result.user_profile._id:'');
+              return false;
+            }
+            else{
+              alert(result.message);
+              return false;
+            }
+          })
+          .catch(error =>{ 
+            console.log('error', error);
+            return false;
+        });
+        // setUserToken('asdd')
       },
-      signOut: () =>{
+      signOut: async () =>{
+        await AsyncStorage.setItem('@user_token','')
         setIsLoading(false);
         setUserToken('')
       },
     };
   },[])
 
-  React.useEffect(()=>{
-    setTimeout(()=>{
+  const getToken = async ()=>{
+    const token = await AsyncStorage.getItem('@user_token')
+      if(token !== null) {
+        setUserToken(token)
+      }
       setIsLoading(false);
-    },1000)
+  }
+
+  React.useEffect( () =>{
+      getToken();
   },[])
 
   if(isLoding)
