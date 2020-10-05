@@ -20,7 +20,7 @@ interface Props {
 }
 
 const AppointmentView = ({ route, navigation }: Props) => {
-    const date = moment(route.params.timeSlot).format("dddd, MMMM Do YYYY")
+    const date = moment(route.params.timeSlot).format("dddd, MMMM Do YYYY") //Have to take data from API
     const startTime = moment(route.params.timeSlot).format("hh:mm a")
     return (
         <Container>
