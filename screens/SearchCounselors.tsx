@@ -4,7 +4,7 @@ import { Container, Header, Left, Body, Text, Content, Item, Icon, Input, List, 
 import Colors from '../constants/Colors';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { TabThreeParamList } from '../types'
+import { TabThreeParamList , Counsellor} from '../types'
 
 type ProfileScreenRouteProp = RouteProp<TabThreeParamList, 'SearchCounselor'>;
 
@@ -18,111 +18,55 @@ interface Props {
 }
 
 export default function TabTwoScreen({ route, navigation }: Props) {
-  const [counselors, setCounselors] = React.useState([
-    {
-      id: '1',
-      firstName: 'Jennie',
-      lastName: 'carlton',
-      image: 'https://randomuser.me/api/portraits/men/90.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Brigitte',
-      lastName: 'Cushman',
-      image: 'https://randomuser.me/api/portraits/men/91.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Kallie',
-      lastName: 'Kaiser',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Raymond',
-      lastName: 'Boone',
-      image: 'https://randomuser.me/api/portraits/men/93.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Tania',
-      lastName: 'Brown',
-      image: 'https://randomuser.me/api/portraits/men/99.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Martin',
-      lastName: 'Santiago',
-      image: 'https://randomuser.me/api/portraits/men/91.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Lillie',
-      lastName: 'Dominguez',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Carlton',
-      lastName: 'Stanton',
-      image: 'https://randomuser.me/api/portraits/men/97.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Yong',
-      lastName: 'Roth',
-      image: 'https://randomuser.me/api/portraits/men/96.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'John',
-      lastName: 'smith',
-      image: 'https://randomuser.me/api/portraits/men/99.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Hong',
-      lastName: 'Contreras',
-      image: 'https://randomuser.me/api/portraits/men/94.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Maci',
-      lastName: 'Horton',
-      image: 'https://randomuser.me/api/portraits/men/91.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Kody',
-      lastName: 'Zimmerman',
-      image: 'https://randomuser.me/api/portraits/men/98.jpg'
-    },
-  ]);
+  const [counselors, setCounselors] = React.useState<Array<Counsellor>>([]);
 
-  const [listData, setlistData] = React.useState(counselors);
+  const [listData, setlistData] = React.useState<Array<Counsellor>>([]);
   const [searchText, setSearchText] = React.useState('');
   const [isEmpty, setEmpty] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
 
-  const counselor = (counselor: Array<Object>) => {
+  const fetchData = (recordes:string) =>{
+    const url = `http://35.193.105.188:5002/api/v1/counselling-service/counsellor/${recordes}`
+    const requestOption:RequestInit = {
+      method:'GET',
+    }
+
+    fetch(url,requestOption)
+    .then(res=>res.json())
+    .then(result=>{
+      console.log(result);
+      setCounselors(result)
+      setlistData(result);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
+
+  React.useEffect(()=>{
+    fetchData('3');
+  },[])
+
+  const counselor = (counselor: Array<Counsellor>) => {
 
     let list: Array<JSX.Element> = []
 
-    counselor.map((value: any, i: any) => {
+    counselor.map((value:Counsellor, i) => {
       list.push(
         <ListItem
           key={i}
           noBorder
           noIndent
           avatar
-          style={{ backgroundColor: Colors.WHITE, height: 60, paddingHorizontal: 20, marginVertical: 1, borderRadius: 15 }}
-          onPress={() => navigation.push('CounselorProfile', { userId: value.id })}
+          style={{ backgroundColor: Colors.WHITE, height: 80, paddingHorizontal: 20, marginVertical: 1, borderRadius: 15 }}
+          onPress={() => navigation.push('CounselorProfile', { userName: value.name })}
         >
-          <Left>
-            <Thumbnail source={{ uri: value.image }} small />
+          <Left >
+            <Thumbnail source={{ uri: value.image }} size={40} />
           </Left>
           <Body>
-            <Text>{value.firstName + " " + value.lastName}</Text>
+            <Text style={{fontSize:20}}>{value.name}</Text>
+            <Text note>{value.speciality}</Text>
           </Body>
           <Icon
             style={{ color: Colors.GRAY }}
@@ -141,7 +85,7 @@ export default function TabTwoScreen({ route, navigation }: Props) {
       const value = text.trim().toUpperCase();
       let newData = [];
       newData = counselors.filter((item) => {
-        const name = item.firstName + " " + item.lastName
+        const name = item.name;
         return name.toUpperCase().match(value)
       })
       if (newData.length === 0) {

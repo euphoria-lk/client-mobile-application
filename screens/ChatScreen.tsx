@@ -7,41 +7,96 @@ import {
   MessageList,
   MessageInput,
 } from "stream-chat-expo";
+import { RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { TabThreeParamList } from "../types";
 
-const chatClient = new StreamChat('r3qdy2xxezkj');
-const userToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiTGFoaXJ1In0.1F452Q-xxP_KRAwj-_T6dq7asdq88Mm6TPTVEdi3Zok';
+type ProfileScreenRouteProp = RouteProp<TabThreeParamList, 'ChatScreen'>;
 
-const user = {
-  id: 'Lahiru',
-  name: 'Dark sun',
-  image:
-    'https://getstream.io/random_png/?id=dark-sun-9&amp;name=Dark+sun',
-};
-chatClient.setUser(user, userToken);
-
-class ChannelScreen extends React.Component {
-  render() {
-    const channel = chatClient.channel("messaging", "fggfgfdgf"); //fggfgfdgf
-    channel.watch();
-
-    return (
-      <SafeAreaView>
-        <Chat client={chatClient}>
-          <Channel channel={channel}>
-            <View style={{ display: "flex", height: "100%" }}>
-              <MessageList />
-              <MessageInput />
-            </View>
-          </Channel>
-        </Chat>
-      </SafeAreaView>
-    );
-  }
+type ProfileScreenNavigationProp = StackNavigationProp<
+  TabThreeParamList,
+  'ChatScreen'
+>;
+interface Props {
+  route: ProfileScreenRouteProp
+  navigation: ProfileScreenNavigationProp
 }
 
-export default class ChatScreen extends React.Component {
-  render() {
-    return <ChannelScreen />;
+
+
+// class ChannelScreen extends React.Component {
+
+//   render() {
+//     const channel = chatClient.channel("messaging", "fggfgfdgf"); //fggfgfdgf
+//     channel.watch();
+
+//     return (
+//       <SafeAreaView>
+//         <Chat client={chatClient}>
+//           <Channel channel={channel}>
+//             <View style={{ display: "flex", height: "100%" }}>
+//               <MessageList />
+//               <MessageInput />
+//             </View>
+//           </Channel>
+//         </Chat>
+//       </SafeAreaView>
+//     );
+//   }
+// }
+
+// export default class ChatScreen extends React.Component {
+//   render() {
+//     return <ChannelScreen />;
+//   }
+// }
+
+
+const ChatScreen = ({navigation, route}:Props) => {
+
+  const [userToken,setUserToken] = React.useState();
+
+  const getUserToken = ()=>{
+    const url = 'http://35.193.105.188:5002/api/v1/counselling-service/chat/init'
+    const requestOption:RequestInit = {
+      method:'POST',
+      headers:{ 'Content-Type': 'application/x-www-form-urlencoded' },
+      body:`string=${route.params.userId}`
+    }
+    fetch(url,requestOption)
+    .then(res=>res.json())
+    .then(res=>{
+      console.log(res);
+      setUserToken(res);
+    })
+    .catch(err=>console.log(err))
   }
+  React.useEffect(()=>{
+    getUserToken();
+  },[])
+  const chatClient = new StreamChat('r3qdy2xxezkj');
+
+  const user = {
+    id: route.params.userId?route.params.userId:"",
+    name: route.params.userName?route.params.userName:"",
+    image:route.params.iamge?route.params.iamge:"",
+  };
+  chatClient.setUser(user, userToken);
+  const channel = chatClient.channel("messaging", route.params.channelId?route.params.channelId:""); //fggfgfdgf
+  channel.watch();
+
+  return (
+    <SafeAreaView>
+      <Chat client={chatClient}>
+        <Channel channel={channel}>
+          <View style={{ display: "flex", height: "100%" }}>
+            <MessageList />
+            <MessageInput />
+          </View>
+        </Channel>
+      </Chat>
+    </SafeAreaView>
+  );
 }
+
+export default ChatScreen;

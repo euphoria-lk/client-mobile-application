@@ -21,14 +21,28 @@ export type TabTowParamList = {
 
 export type TabThreeParamList = {
   SearchCounselor: undefined;
-  CounselorProfile: { userId: string };
-  AvailableTime: { userId: string };
-  AddAppointment: { userId: string, timeSlot: string }
-  ChatScreen: { userId: string, userName: string };
+  CounselorProfile: {userName:string};
+  AvailableTime:{counsellorEmail?:string};
+  AddAppointment:{userId:string,timeSlot:string}
+  ChatScreen: {userId?:string|null, channelId?:string|null,userName?:string|null,iamge?:string|null,counsellorName?:string|null};
 };
 
 export type TabFourParamList = {
   Appointments: undefined;
   AppointmentView: { appointmentId: string }
+}
+
+export type Counsellor = {
+  _id:string,
+  email:string,
+  name: string,
+  description: string,
+  slmc: string,
+  hospital: string,
+  speciality: string,
+  city: string,
+  image: string,
+  createdAt: string,
+  updatedAt: string,
 }
 
