@@ -25,14 +25,25 @@ const desscription = "I think it is much easier to just use a unicode character 
 
 const Profile = ({ route, navigation }: Props) => {
     const [counsellorData, setCounsellorData] = React.useState<Counsellor>();
-    const [userId, setUserId] = React.useState('');
     const [chatChannel, setChatChannel] = React.useState('');
     const [isLoading, setLoading] = React.useState(true);
 
+    const [userId,setUserId] = React.useState<string|null>('')
+    const [userName,setUserName] = React.useState<string|null>('')
+    const [userImage,setUserImage] = React.useState<string|null>('')
+
     const LoadData = async () => {
         const name = route.params.userName;
-        const userId = await AsyncStorage.getItem('@user_token')
-        console.log('UserToken :', userId);
+        const tempUserId = await AsyncStorage.getItem('@user_token')
+        console.log('UserToken :', tempUserId);
+        setUserId(tempUserId)
+        const tempUserImage = await AsyncStorage.getItem('@user_image')
+        console.log('UserImage :', tempUserImage);
+        setUserId(tempUserImage)
+        const tempUserName = await AsyncStorage.getItem('@user_name')
+        console.log('UserName :', tempUserName);
+        setUserId(tempUserName)
+
         const url1 = `http://35.192.213.59:5001/api/v1/counsellor-service/counsellor/${name}`;
         const requestOption1: RequestInit = {
             method: 'GET'
@@ -126,7 +137,7 @@ const Profile = ({ route, navigation }: Props) => {
                     if (name === "bt_appointment") {
                         navigation.push('AvailableTime', { counsellorEmail: counsellorData?.email });
                     } else {
-                        navigation.push('ChatScreen', { userId: userId, channelId:chatChannel, userName: "Bavindu Dilshan" });
+                        navigation.push('ChatScreen', { userId: userId, channelId:chatChannel, userName: userName, iamge:userImage, counsellorName:counsellorData?.name});
                     }
                 }}
             />
