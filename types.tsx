@@ -12,7 +12,7 @@ export type BottomTabParamList = {
 
 export type TabOneParamList = {
   Profile: undefined;
-  EditProfile:{userId:string};
+  EditProfile: { userId: string };
 }
 
 export type TabTowParamList = {
@@ -21,13 +21,14 @@ export type TabTowParamList = {
 
 export type TabThreeParamList = {
   SearchCounselor: undefined;
-  CounselorProfile: {userId:string};
-  AvailableTime:{userId:string};
-  AddAppointment:{userId:string,timeSlot:string}
-  ChatScreen: {userId:string,userName:string};
+  CounselorProfile: { userId: string };
+  AvailableTime: { userId: string };
+  AddAppointment: { userId: string, timeSlot: string }
+  ChatScreen: { userId: string, userName: string };
 };
 
 export type TabFourParamList = {
-  Appointments:undefined;
+  Appointments: undefined;
+  AppointmentView: { appointmentId: string }
 }
 
