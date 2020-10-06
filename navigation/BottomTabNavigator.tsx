@@ -126,7 +126,7 @@ function TabThreeNavigator() {
       <TabThreeStack.Screen
         name="ChatScreen"
         component={ChatScreen}
-        options={(params)=>({ headerTitle: params.route.params.counsellorName?params.route.params.counsellorName:""})}
+        options={(params) => ({ headerTitle: params.route.params.counsellorName ? params.route.params.counsellorName : "" })}
       />
       <TabThreeStack.Screen
         name="AddAppointment"
@@ -136,7 +136,7 @@ function TabThreeNavigator() {
       <TabThreeStack.Screen
         name="PickDate"
         component={PickDate}
-        options={{ headerTitle: 'Pick A Date'}}
+        options={{ headerTitle: 'Pick A Date' }}
       />
     </TabThreeStack.Navigator>
   );
