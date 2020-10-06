@@ -9,7 +9,7 @@ import BottomTabNavigator from './BottomTabNavigator';
 import AuthNavigator from './AuthNavigator';
 import SplashScreen from '../screens/SplashScreen';
 
-import {AuthContext} from './cntext';
+import { AuthContext } from './cntext';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -20,9 +20,9 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   const [isLoding, setIsLoading] = React.useState(true);
   const [userToken, setUserToken] = React.useState('');
 
-  const context = React.useMemo(()=>{
-    return{
-      signIn: (email:string,password:string) =>{
+  const context = React.useMemo(() => {
+    return {
+      signIn: (email: string, password: string) => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -30,7 +30,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
         urlencoded.append("email", "kasunwpdimuthu@gmail.com");
         urlencoded.append("password", "dimuthu");
 
-        var requestOptions:RequestInit = {
+        var requestOptions: RequestInit = {
           method: 'POST',
           headers: myHeaders,
           body: `email=${email}&password=${password}`,
@@ -40,59 +40,58 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
         fetch("http://34.121.143.209:5000/api/v1/client-service/login", requestOptions)
           .then(response => response.json())
           .then(async result => {
-            if(result.success === "true"){
+            if (result.success === "true") {
               console.log(result)
-              await AsyncStorage.setItem('@user_token', result.user_profile._id?result.user_profile._id:'')
-              await AsyncStorage.setItem('@user_name',result.user_profile._id?result.user_profile.firstname:'')
-              await AsyncStorage.setItem('@user_fname',result.user_profile._id?result.user_profile.firstname:'')
-              await AsyncStorage.setItem('@user_lname',result.user_profile._id?result.user_profile.lastname:'')
-              await AsyncStorage.setItem('@user_image',result.user_profile.image?result.user_profile.image:'')
-              setUserToken(result.user_profile._id?result.user_profile._id:'');
+              await AsyncStorage.setItem('@user_token', result.user_profile._id ? result.user_profile._id : '')
+              await AsyncStorage.setItem('@user_name', result.user_profile._id ? result.user_profile.firstname : '')
+              await AsyncStorage.setItem('@user_fname', result.user_profile._id ? result.user_profile.firstname : '')
+              await AsyncStorage.setItem('@user_lname', result.user_profile._id ? result.user_profile.lastname : '')
+              await AsyncStorage.setItem('@user_image', result.user_profile.image ? result.user_profile.image : '')
+              setUserToken(result.user_profile._id ? result.user_profile._id : '');
               return false;
             }
-            else{
+            else {
               alert(result.message);
               return false;
             }
           })
-          .catch(error =>{ 
+          .catch(error => {
             console.log('error', error);
             return false;
-        });
+          });
         // setUserToken('asdd')
       },
-      signOut: async () =>{
-        await AsyncStorage.setItem('@user_token','')
+      signOut: async () => {
+        await AsyncStorage.setItem('@user_token', '')
         setIsLoading(false);
         setUserToken('')
       },
     };
-  },[])
+  }, [])
 
-  const getToken = async ()=>{
+  const getToken = async () => {
     const token = await AsyncStorage.getItem('@user_token')
-      if(token !== null) {
-        setUserToken(token)
-      }
-      setIsLoading(false);
+    if (token !== null) {
+      setUserToken(token)
+    }
+    setIsLoading(false);
   }
 
-  React.useEffect( () =>{
-      getToken();
-  },[])
+  React.useEffect(() => {
+    getToken();
+  }, [])
 
-  if(isLoding)
-  {
-    return <SplashScreen/>
+  if (isLoding) {
+    return <SplashScreen />
   }
 
   return (
-    <AuthContext.Provider value={{signIn:context.signIn,signOut:context.signOut}}>
+    <AuthContext.Provider value={{ signIn: context.signIn, signOut: context.signOut }}>
       <NavigationContainer>
         {userToken ?
-        <RootNavigator />
-        :
-        <AuthNavigator/>
+          <RootNavigator />
+          :
+          <AuthNavigator />
         }
       </NavigationContainer>
     </AuthContext.Provider>
