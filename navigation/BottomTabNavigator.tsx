@@ -15,11 +15,8 @@ import Profile from '../screens/Profile';
 import EditProfile from '../screens/EditProfile';
 import { BottomTabParamList, TabTowParamList, TabThreeParamList, TabOneParamList, TabFourParamList } from '../types';
 import ChatScreen from '../screens/ChatScreen';
-<<<<<<< HEAD
 import PickDate from '../screens/PickDate';
-=======
 import AppointmentView from '../screens/AppointmentView';
->>>>>>> c1c8fe6a2110541bf32cdcdb849731981bf874c2
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 

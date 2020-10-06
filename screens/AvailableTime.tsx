@@ -24,6 +24,7 @@ const AvailableTime = ({route,navigation}: Props) => {
     const [counsellorEmail, setCounsellorEmail] = React.useState(route.params.counsellorEmail);
     const [userId, setUserId] = React.useState(route.params.userId);
     const [date, setDate] = React.useState(route.params.date);
+    const [counsellorName, setCounsellorName] = React.useState(route.params.counsellorName);
     const [isLoading,setLoading] = React.useState(true);
     const [availableTimeSlots,setAvailableTimeSlots] = React.useState<Array<string>>([])
 
@@ -53,70 +54,23 @@ const AvailableTime = ({route,navigation}: Props) => {
         loadAvailableTimeSlots();
     },[])
 
-
-    // const availabletimelist = () => {
-    //     let list: Array<JSX.Element> = []
-    //     let tempdate = moment().subtract(1, 'days').format("DD MM YYYY");
-    //     let date;
-    //     let time;
-    //     availabletimes.map((value, i) => {
-    //         date = moment(value).format("DD MM YYYY");
-    //         time = moment(value).format("hh:mm a")
-    //         console.log(tempdate)
-    //         console.log(time)
-    //         if (!tempdate.match(date)) {
-    //             tempdate = date
-    //             list.push(
-    //                 <ListItem noBorder itemDivider key={date} style={{justifyContent:'center'}}>
-    //                     <Text style={{color:Colors.NAVYBLUE, fontSize:18, fontWeight:'bold'}}>{moment(value).format("dddd, MMMM Do YYYY")}</Text>
-    //                 </ListItem>
-    //             )
-    //         }
-    //         list.push(
-    //             <ListItem
-    //              key={i} 
-    //              noBorder
-    //              onPress={()=>navigation.push('AddAppointment',{userId:route.params.userId,timeSlot:value})}
-    //              noIndent 
-    //              style={{justifyContent:'center', backgroundColor:Colors.WHITE, borderRadius:20, marginVertical:1, marginHorizontal:30}}
-    //              >
-    //                 <Text style={{fontSize:17}}>{time}</Text>
-    //             </ListItem>
-    //         )
-
-    //     })
-    //     return list;
-    // }
-
     const availabletimelist = () => {
         let list: Array<JSX.Element> = []
-        let tempdate = moment().subtract(1, 'days').format("DD MM YYYY");
-        let date;
-        let time;
-        availabletimes.map((value, i) => {
-            date = moment(value).format("DD MM YYYY");
-            time = moment(value).format("hh:mm a")
-            console.log(tempdate)
-            console.log(time)
-            if (!tempdate.match(date)) {
-                tempdate = date
-                list.push(
-                    <ListItem noBorder itemDivider key={date} style={{justifyContent:'center'}}>
-                        <Text style={{color:Colors.NAVYBLUE, fontSize:18, fontWeight:'bold'}}>{moment(value).format("dddd, MMMM Do YYYY")}</Text>
-                    </ListItem>
-                )
-            }
+        availableTimeSlots.map((value:string, i) => {
+            const booked = "booked"
+            if(value!==booked){
             list.push(
                 <ListItem
                  key={i} 
                  noBorder
-                 onPress={()=>navigation.push('AddAppointment',{userId:route.params.userId,timeSlot:value})}
+                 onPress={()=>navigation.push('AddAppointment',{userId:userId,timeSlot:value, date:date, counsellorName:counsellorName})}
                  noIndent 
-                 style={{justifyContent:'center', backgroundColor:Colors.WHITE, borderRadius:20, marginVertical:1, marginHorizontal:30}}
+                 style={{justifyContent:'center', backgroundColor:Colors.WHITE, borderRadius:20, marginVertical:3, marginHorizontal:50}}
                  >
-                    <Text style={{fontSize:17}}>{time}</Text>
+                    <Text style={{fontSize:18, fontWeight:'bold'}}>{value}</Text>
                 </ListItem>
             )
+            }
 
         })
         return list;
