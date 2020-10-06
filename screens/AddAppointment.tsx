@@ -46,7 +46,7 @@ const AddAppointment = ({ route, navigation }: Props) => {
         .then(res=>res.json())
         .then(res=>{
             setLoading(false);
-            alert(res);
+            alert(res.message);
             console.log(res.message);
             navigation.popToTop();
         })
