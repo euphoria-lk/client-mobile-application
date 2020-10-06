@@ -6,6 +6,7 @@ import moment, { Moment } from 'moment';
 import { RouteProp } from '@react-navigation/native';
 import { TabThreeParamList } from '../types';
 import { StackNavigationProp } from '@react-navigation/stack';
+import LoadingScreen from './SplashScreen';
 
 type ProfileScreenRouteProp = RouteProp<TabThreeParamList, 'AvailableTime'>;
 
@@ -20,10 +21,72 @@ interface Props {
 
 const AvailableTime = ({route,navigation}: Props) => {
 
+    const [counsellorEmail, setCounsellorEmail] = React.useState(route.params.counsellorEmail);
+    const [userId, setUserId] = React.useState(route.params.userId);
+    const [date, setDate] = React.useState(route.params.date);
+    const [isLoading,setLoading] = React.useState(true);
+    const [availableTimeSlots,setAvailableTimeSlots] = React.useState<Array<string>>([])
+
     const availabletimes = [
         '2020-02-04T09:00:00', '2020-02-04T11:00:00', '2020-02-04T14:00:00', '2020-02-05T09:00:00', '2020-02-05T14:00:00'
     ]
 
+    const loadAvailableTimeSlots = () =>{
+        const url = `http://35.193.105.188:5002/api/v1/counselling-service/counsellor/getAvailableTimes/${counsellorEmail}&${date}`;
+        const requestOption : RequestInit = {
+            method:'GET'
+        }
+        fetch(url,requestOption)
+        .then(res=>res.json())
+        .then(res=>{
+            console.log(res);
+            setAvailableTimeSlots(res);
+        })
+        .catch(err=>{
+            console.log(err);
+            setLoading(false);
+            navigation.popToTop();
+        })
+    }
+
+    React.useEffect(()=>{
+        loadAvailableTimeSlots();
+    },[])
+
+
+    // const availabletimelist = () => {
+    //     let list: Array<JSX.Element> = []
+    //     let tempdate = moment().subtract(1, 'days').format("DD MM YYYY");
+    //     let date;
+    //     let time;
+    //     availabletimes.map((value, i) => {
+    //         date = moment(value).format("DD MM YYYY");
+    //         time = moment(value).format("hh:mm a")
+    //         console.log(tempdate)
+    //         console.log(time)
+    //         if (!tempdate.match(date)) {
+    //             tempdate = date
+    //             list.push(
+    //                 <ListItem noBorder itemDivider key={date} style={{justifyContent:'center'}}>
+    //                     <Text style={{color:Colors.NAVYBLUE, fontSize:18, fontWeight:'bold'}}>{moment(value).format("dddd, MMMM Do YYYY")}</Text>
+    //                 </ListItem>
+    //             )
+    //         }
+    //         list.push(
+    //             <ListItem
+    //              key={i} 
+    //              noBorder
+    //              onPress={()=>navigation.push('AddAppointment',{userId:route.params.userId,timeSlot:value})}
+    //              noIndent 
+    //              style={{justifyContent:'center', backgroundColor:Colors.WHITE, borderRadius:20, marginVertical:1, marginHorizontal:30}}
+    //              >
+    //                 <Text style={{fontSize:17}}>{time}</Text>
+    //             </ListItem>
+    //         )
+
+    //     })
+    //     return list;
+    // }
 
     const availabletimelist = () => {
         let list: Array<JSX.Element> = []
@@ -57,6 +120,10 @@ const AvailableTime = ({route,navigation}: Props) => {
 
         })
         return list;
+    }
+
+    if(isLoading){
+        <LoadingScreen/>
     }
     return (
         <Container>

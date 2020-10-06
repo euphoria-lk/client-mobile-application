@@ -15,6 +15,7 @@ import Profile from '../screens/Profile';
 import EditProfile from '../screens/EditProfile';
 import { BottomTabParamList, TabTowParamList, TabThreeParamList, TabOneParamList, TabFourParamList } from '../types';
 import ChatScreen from '../screens/ChatScreen';
+import PickDate from '../screens/PickDate';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -130,6 +131,11 @@ function TabThreeNavigator() {
         name="AddAppointment"
         component={AddAppointment}
         options={{ headerTitle: 'Confirm Appointment'}}
+      />
+      <TabThreeStack.Screen
+        name="PickDate"
+        component={PickDate}
+        options={{ headerTitle: 'Pick A Date'}}
       />
     </TabThreeStack.Navigator>
   );

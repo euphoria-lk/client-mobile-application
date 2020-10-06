@@ -22,9 +22,10 @@ export type TabTowParamList = {
 export type TabThreeParamList = {
   SearchCounselor: undefined;
   CounselorProfile: {userName:string,};
-  AvailableTime:{counsellorEmail?:string, userId?:string};
+  AvailableTime:{counsellorEmail?:string, userId?:string, date:string};
   AddAppointment:{userId?:string,timeSlot:string}
   ChatScreen: {userId?:string|null, channelId?:string|null,userName?:string|null,iamge?:string|null,counsellorName?:string|null};
+  PickDate: {counsellorEmail?:string,userId:string};
 };
 
 export type TabFourParamList = {

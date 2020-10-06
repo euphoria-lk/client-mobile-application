@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, StatusBar, Image, AsyncStorage } from 'react-native';
-import { Container, Header, Content, Grid, Row, Body, Thumbnail, View, Col, Form, Item, Input, Label, Button, Text, Icon, Badge, Title, Left } from 'native-base';
+import { StyleSheet, StatusBar, Image, AsyncStorage, YellowBox } from 'react-native';
+import { Container, Header, Content, Grid, Row, Body, Thumbnail, View, Col, Form, Item, Input, Label, Button, Text, Icon, Badge, Title, Left , DatePicker} from 'native-base';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -78,9 +78,12 @@ const Profile = ({ route, navigation }: Props) => {
             })
 
     }
+
     React.useEffect(() => {
+        YellowBox.ignoreWarnings(['Animated: `useNativeDriver`']);
         LoadData();
     }, [])
+
     const actions = [
         {
             text: "Make Appoinment",
@@ -127,7 +130,6 @@ const Profile = ({ route, navigation }: Props) => {
                         <Text style={styles.descriptionTEXT}>{counsellorData?.description}</Text>
                     </Row>
                 </Grid>
-
             </Content>
             <FloatingAction
                 floatingIcon={<Icon name='emoticon-happy' type='MaterialCommunityIcons' style={{ color: Colors.WHITE }} />}
@@ -135,7 +137,8 @@ const Profile = ({ route, navigation }: Props) => {
                 actions={actions}
                 onPressItem={(name) => {
                     if (name === "bt_appointment") {
-                        navigation.push('AvailableTime', { counsellorEmail: counsellorData?.email, userId:userId?userId:"" });
+                        // navigation.push('AvailableTime', { counsellorEmail: counsellorData?.email, userId:userId?userId:"" });
+                        navigation.push('PickDate',{counsellorEmail:counsellorData?.email, userId:userId?userId:"" })
                     } else {
                         navigation.push('ChatScreen', { userId: userId, channelId:chatChannel, userName: userName, iamge:userImage, counsellorName:counsellorData?.name});
                     }

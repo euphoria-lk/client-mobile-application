@@ -44,6 +44,8 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
               console.log(result)
               await AsyncStorage.setItem('@user_token', result.user_profile._id?result.user_profile._id:'')
               await AsyncStorage.setItem('@user_name',result.user_profile._id?result.user_profile.firstname:'')
+              await AsyncStorage.setItem('@user_fname',result.user_profile._id?result.user_profile.firstname:'')
+              await AsyncStorage.setItem('@user_lname',result.user_profile._id?result.user_profile.lastname:'')
               await AsyncStorage.setItem('@user_image',result.user_profile.image?result.user_profile.image:'')
               setUserToken(result.user_profile._id?result.user_profile._id:'');
               return false;
