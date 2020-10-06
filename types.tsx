@@ -12,7 +12,7 @@ export type BottomTabParamList = {
 
 export type TabOneParamList = {
   Profile: undefined;
-  EditProfile:{userId:string};
+  EditProfile: { userId: string };
 }
 
 export type TabTowParamList = {
@@ -29,7 +29,8 @@ export type TabThreeParamList = {
 };
 
 export type TabFourParamList = {
-  Appointments:undefined;
+  Appointments: undefined;
+  AppointmentView: { appointmentId: string }
 }
 
 export type Counsellor = {

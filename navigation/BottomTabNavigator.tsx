@@ -15,7 +15,11 @@ import Profile from '../screens/Profile';
 import EditProfile from '../screens/EditProfile';
 import { BottomTabParamList, TabTowParamList, TabThreeParamList, TabOneParamList, TabFourParamList } from '../types';
 import ChatScreen from '../screens/ChatScreen';
+<<<<<<< HEAD
 import PickDate from '../screens/PickDate';
+=======
+import AppointmentView from '../screens/AppointmentView';
+>>>>>>> c1c8fe6a2110541bf32cdcdb849731981bf874c2
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -26,12 +30,12 @@ export default function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="TabTow"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
-        <BottomTab.Screen
+      <BottomTab.Screen
         name="TabOne"
         component={TabOneNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
-          title:'Profile'
+          title: 'Profile'
         }}
       />
       <BottomTab.Screen
@@ -39,7 +43,7 @@ export default function BottomTabNavigator() {
         component={TabTowNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-people" color={color} />,
-          title:'Forum'
+          title: 'Forum'
         }}
       />
       <BottomTab.Screen
@@ -47,7 +51,7 @@ export default function BottomTabNavigator() {
         component={TabThreeNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-search" color={color} />,
-          title:'Counsellors'
+          title: 'Counsellors'
         }}
       />
       <BottomTab.Screen
@@ -55,7 +59,7 @@ export default function BottomTabNavigator() {
         component={TabFourNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-calendar" color={color} />,
-          title:'Appointments'
+          title: 'Appointments'
         }}
       />
     </BottomTab.Navigator>
@@ -78,7 +82,7 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name='Profile'
         component={Profile}
-        options={{ headerTitle: 'Your Profile', headerTitleContainerStyle:{alignItems: 'center',} }}
+        options={{ headerTitle: 'Your Profile', headerTitleContainerStyle: { alignItems: 'center', } }}
       />
       <TabOneStack.Screen
         name='EditProfile'
@@ -96,7 +100,7 @@ function TabTowNavigator() {
       <TabTowStack.Screen
         name="Forum"
         component={TabOneScreen}
-        options={{ headerTitle: 'Forum', headerTitleContainerStyle:{alignItems: 'center',} }}
+        options={{ headerTitle: 'Forum', headerTitleContainerStyle: { alignItems: 'center', } }}
       />
     </TabTowStack.Navigator>
   );
@@ -110,17 +114,17 @@ function TabThreeNavigator() {
       <TabThreeStack.Screen
         name="SearchCounselor"
         component={SearchCounselor}
-        options={{ headerTitle: 'Counsellors', headerTitleContainerStyle:{alignItems: 'center',}}}
+        options={{ headerTitle: 'Counsellors', headerTitleContainerStyle: { alignItems: 'center', } }}
       />
       <TabThreeStack.Screen
         name="CounselorProfile"
         component={CounselorProfile}
-        options={{ headerTitle: 'Counsellor Profile'}}
+        options={{ headerTitle: 'Counsellor Profile' }}
       />
       <TabThreeStack.Screen
         name="AvailableTime"
         component={AvailableTime}
-        options={{ headerTitle: 'Available Time Slots'}}
+        options={{ headerTitle: 'Available Time Slots' }}
       />
       <TabThreeStack.Screen
         name="ChatScreen"
@@ -130,7 +134,7 @@ function TabThreeNavigator() {
       <TabThreeStack.Screen
         name="AddAppointment"
         component={AddAppointment}
-        options={{ headerTitle: 'Confirm Appointment'}}
+        options={{ headerTitle: 'Confirm Appointment' }}
       />
       <TabThreeStack.Screen
         name="PickDate"
@@ -149,7 +153,12 @@ function TabFourNavigator() {
       <TabFourStack.Screen
         name='Appointments'
         component={Appointments}
-        options={{headerTitle:'Your Appointments', headerTitleContainerStyle:{alignItems: 'center',}}}
+        options={{ headerTitle: 'Your Appointments', headerTitleContainerStyle: { alignItems: 'center', } }}
+      />
+      <TabFourStack.Screen
+        name='AppointmentView'
+        component={AppointmentView}
+        options={{ headerTitle: 'Appointment Details' }}
       />
     </TabFourStack.Navigator>
   );
