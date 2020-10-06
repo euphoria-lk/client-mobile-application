@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, } from 'react-native';
+import {WebView} from 'react-native-webview';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { Button } from 'native-base';
 import { AuthContext } from '../navigation/cntext';
 
 export default function TabOneScreen() {
-  const {signOut} = React.useContext(AuthContext)
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Forum</Text>
-    </View>
+  return(
+    <WebView pullToRefreshEnabled={true} bounces={true} source={{uri:"https://www.youtube.com/playlist?list=PLSJfTZhMlbkTSGNKBD_rL1g7pnE-UVCOB"}}/>
   );
 }
 

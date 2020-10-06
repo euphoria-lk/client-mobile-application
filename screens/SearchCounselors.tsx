@@ -44,7 +44,7 @@ export default function TabTwoScreen({ route, navigation }: Props) {
   }
 
   React.useEffect(()=>{
-    fetchData('3');
+    fetchData('10');
   },[])
 
   const counselor = (counselor: Array<Counsellor>) => {

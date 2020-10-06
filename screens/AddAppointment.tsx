@@ -82,10 +82,10 @@ const AddAppointment = ({ route, navigation }: Props) => {
                         <Text style={styles.regTitle}>Duration : </Text>
                         <Text style={styles.regText}>1 hour</Text>
                     </Row>
-                    <Row style={styles.regRow}>
+                    {/* <Row style={styles.regRow}>
                         <Text style={styles.regTitle}>Fee : </Text>
                         <Text style={styles.regText}>Rs.500</Text>
-                    </Row>
+                    </Row> */}
                     <Row style={{ ...styles.noteRow, marginBottom: 5, backgroundColor:Colors.WHITE }}>
                         <Text style={{ ...styles.noteTitle, color: Colors.BLACK }}>Description : </Text>
                         <Textarea

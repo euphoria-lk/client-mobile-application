@@ -5,7 +5,8 @@ import { AuthContext } from '../navigation/cntext';
 import Colors from '../constants/Colors';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { TabFourParamList } from '../types';
+import { TabFourParamList, Appointment, Counsellor} from '../types';
+import AsyncStorage from '@react-native-community/async-storage';
 
 type AppointmentViewRouteProp = RouteProp<TabFourParamList, 'Appointments'>;
 
@@ -21,50 +22,49 @@ interface AppointmentsProps { }
 
 const Appointments = ({ navigation, route }: Props) => {
 
-  const [counselors, setCounselors] = React.useState([
-    {
-      id: '1',
-      firstName: 'Jennie',
-      lastName: 'carlton',
-      timeSlot: '7-8',
-      image: 'https://randomuser.me/api/portraits/men/90.jpg'
-    },
-    {
-      id: '2',
-      firstName: 'Brigitte',
-      lastName: 'Cushman',
-      timeSlot: '1-2',
-      image: 'https://randomuser.me/api/portraits/men/91.jpg'
-    }
-  ]);
-
-  const [listData, setlistData] = React.useState(counselors);
-  const [searchText, setSearchText] = React.useState('');
+  const [appointments,setAppointments] = React.useState<Array<Appointment>>([])
   const [isEmpty, setEmpty] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
 
-  const myAppointments = (myAppointments: Array<Object>) => {
+  const loadData = async ()=>{
+    const userEmail = await AsyncStorage.getItem('@user_email');
+    const url = `http://35.193.105.188:5002/api/v1/counselling-service/appointments/user/${userEmail}`;
+    const requestOption:RequestInit = {
+      method:'GET'
+    }
+
+    fetch(url,requestOption)
+    .then(res=>res.json())
+    .then(res=>{
+      setAppointments(res);
+    })
+    .catch(err=>alert(err));
+  }
+
+  React.useEffect(()=>{
+    loadData();
+  })
+
+  const myAppointments = (myAppointments: Array<Appointment>) => {
 
     let list: Array<JSX.Element> = []
 
-    myAppointments.map((value: any, i: any) => {
+    myAppointments.map((value: Appointment, i: any) => {
+
       list.push(
         <ListItem
           key={i}
           noBorder
           noIndent
           avatar
-          style={{ backgroundColor: Colors.WHITE, height: 60, paddingHorizontal: 20, marginVertical: 1, borderRadius: 15 }}
-          onPress={() => navigation.push('AppointmentView', { appointmentId: "1234121" })}
+          style={{ backgroundColor: Colors.WHITE, height: 80, paddingHorizontal: 20, marginVertical: 3, borderRadius: 15 }}
+          onPress={() => navigation.push('AppointmentView', { appointmentId: value._id})}
         >
-          <Left>
-            <Thumbnail source={{ uri: value.image }} small />
-          </Left>
           <Body>
-            <Text>{value.firstName + " " + value.lastName}</Text>
+            <Text style={{fontSize:18, fontWeight:'bold'}}>Appointment</Text>
           </Body>
-          <Right>
-            <Text>{value.timeSlot}</Text>
+          <Right style={{justifyContent:'center'}}>
+            <Text>{value.bookingDate+"     "+value.timeSlot}</Text>
           </Right>
           <Icon
             style={{ color: Colors.GRAY }}
@@ -94,7 +94,7 @@ const Appointments = ({ navigation, route }: Props) => {
                     <Text>No result found</Text>
                   </ListItem>
                   :
-                  myAppointments(listData)
+                  myAppointments(appointments)
               )
           }
         </List>

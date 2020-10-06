@@ -25,7 +25,7 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabTow"
+      initialRouteName="TabThree"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
         name="TabOne"
@@ -39,8 +39,8 @@ export default function BottomTabNavigator() {
         name="TabTow"
         component={TabTowNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-people" color={color} />,
-          title: 'Forum'
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-musical-note" color={color} />,
+          title: 'Music'
         }}
       />
       <BottomTab.Screen
@@ -97,7 +97,7 @@ function TabTowNavigator() {
       <TabTowStack.Screen
         name="Forum"
         component={TabOneScreen}
-        options={{ headerTitle: 'Forum', headerTitleContainerStyle: { alignItems: 'center', } }}
+        options={{ headerTitle: 'Music', headerTitleContainerStyle: { alignItems: 'center', } }}
       />
     </TabTowStack.Navigator>
   );
@@ -156,6 +156,31 @@ function TabFourNavigator() {
         name='AppointmentView'
         component={AppointmentView}
         options={{ headerTitle: 'Appointment Details' }}
+      />
+      <TabThreeStack.Screen
+        name="CounselorProfile"
+        component={CounselorProfile}
+        options={{ headerTitle: 'Counsellor Profile' }}
+      />
+      <TabThreeStack.Screen
+        name="AvailableTime"
+        component={AvailableTime}
+        options={{ headerTitle: 'Available Time Slots' }}
+      />
+      <TabThreeStack.Screen
+        name="ChatScreen"
+        component={ChatScreen}
+        options={(params) => ({ headerTitle: params.route.params.counsellorName ? params.route.params.counsellorName : "" })}
+      />
+      <TabThreeStack.Screen
+        name="AddAppointment"
+        component={AddAppointment}
+        options={{ headerTitle: 'Confirm Appointment' }}
+      />
+      <TabThreeStack.Screen
+        name="PickDate"
+        component={PickDate}
+        options={{ headerTitle: 'Pick A Date' }}
       />
     </TabFourStack.Navigator>
   );
