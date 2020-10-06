@@ -138,7 +138,7 @@ const Profile = ({ route, navigation }: Props) => {
                 onPressItem={(name) => {
                     if (name === "bt_appointment") {
                         // navigation.push('AvailableTime', { counsellorEmail: counsellorData?.email, userId:userId?userId:"" });
-                        navigation.push('PickDate',{counsellorEmail:counsellorData?.email, userId:userId?userId:"" })
+                        navigation.push('PickDate',{counsellorEmail:counsellorData?.email, userId:userId?userId:"", counsellorName:counsellorData?.name?counsellorData?.name:""})
                     } else {
                         navigation.push('ChatScreen', { userId: userId, channelId:chatChannel, userName: userName, iamge:userImage, counsellorName:counsellorData?.name});
                     }

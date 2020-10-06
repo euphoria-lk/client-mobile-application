@@ -22,10 +22,10 @@ export type TabTowParamList = {
 export type TabThreeParamList = {
   SearchCounselor: undefined;
   CounselorProfile: { userName: string, };
-  AvailableTime: { counsellorEmail?: string, userId?: string, date: string };
-  AddAppointment: { userId?: string, timeSlot: string }
+  AvailableTime: { counsellorEmail?: string, userId?: string, date: string, counsellorName: string };
+  AddAppointment: { userId?: string, timeSlot: string, date?: string, counsellorName?: string }
   ChatScreen: { userId?: string | null, channelId?: string | null, userName?: string | null, iamge?: string | null, counsellorName?: string | null };
-  PickDate: { counsellorEmail?: string, userId: string };
+  PickDate: { counsellorEmail?: string, userId: string, counsellorName: string };
 };
 
 export type TabFourParamList = {

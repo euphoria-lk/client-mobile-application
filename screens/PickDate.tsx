@@ -18,46 +18,51 @@ interface Props {
     navigation: ProfileScreenNavigationProp
 }
 
-interface PickDateProps {}
+interface PickDateProps { }
 
-const PickDate = ({navigation,route}:Props) => {
-    const setDate = (newDate:Date)=>{
+const PickDate = ({ navigation, route }: Props) => {
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
+    const setDate = (newDate: Date) => {
         const counsellorEmail = route.params.counsellorEmail;
         const userId = route.params.userId;
+        const counsellorName = route.params.counsellorName;
         const date = moment(newDate).format("YYYY-MM-DD");
         console.log(date);
-        navigation.push('AvailableTime',{counsellorEmail:counsellorEmail, userId:userId, date:date})
+        navigation.push('AvailableTime', { counsellorEmail: counsellorEmail, userId: userId, date: date, counsellorName: counsellorName })
     }
-  return (
-    <View style={styles.container}>
-        <Text style={{fontSize:20, marginBottom:10}}>Please Pick a Date :</Text>
-        <Item rounded style={{width:200, justifyContent:'center', borderColor:Colors.NAVYBLUE}}>
-            <DatePicker
-                
-                defaultDate={new Date()}
-                minimumDate={new Date()}
-                locale={"en"}
-                timeZoneOffsetInMinutes={undefined}
-                modalTransparent={false}
-                animationType={"fade"}
-                androidMode={"default"}
-                placeHolderText="Select Date"
-                textStyle={{ color: "green" }}
-                placeHolderTextStyle={{ color: Colors.GRAY }}
-                onDateChange={date=>setDate(date)}
-                disabled={false}
+    return (
+        <View style={styles.container}>
+            <Text style={{ fontSize: 20, marginBottom: 10 }}>Please Pick a Date :</Text>
+            <Item rounded style={{ width: 200, justifyContent: 'center', borderColor: Colors.NAVYBLUE }}>
+                <DatePicker
+
+                    defaultDate={tomorrow}
+                    minimumDate={tomorrow}
+                    locale={"en"}
+                    timeZoneOffsetInMinutes={undefined}
+                    modalTransparent={false}
+                    animationType={"fade"}
+                    androidMode={"default"}
+                    placeHolderText="Select Date"
+                    textStyle={{ color: "green" }}
+                    placeHolderTextStyle={{ color: Colors.GRAY }}
+                    onDateChange={date => setDate(date)}
+                    disabled={false}
                 />
-        </Item>
-    </View>
-  );
+            </Item>
+        </View>
+    );
 };
 
 export default PickDate;
 
 const styles = StyleSheet.create({
-  container: {
-      flex:1,
-      justifyContent:'center',
-      alignItems:'center'
-  }
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });
